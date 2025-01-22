@@ -24,7 +24,7 @@ int main(void) {
 				placedSpace = YES;
 			}
 		}
-		if (c != ' ' ) {
+		if (c != ' ') {
 			putchar(c);
 			placedSpace = NO;
 		}
