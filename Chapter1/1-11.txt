@@ -1,0 +1,5 @@
+- Test with regular input.
+- Test with leading and trailing new spaces, and new lines.
+- Test with multiple spaces between words.
+- Test with no words in input, only spaces and tabs
+- Test with no characters in the input
