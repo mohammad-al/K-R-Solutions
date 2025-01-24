@@ -39,7 +39,7 @@ int main(void) {
 			++numCharacters;
 		}
 	}
-	for (int i = 1; i < MAX_LENGTH; ++i) {
+	for (int i = 1; i <= MAX_LENGTH; ++i) {
 		printf("%d: ", i);
 		for (int j = 0; j < wordLengths[i]; ++j) {
 			putchar('*');
