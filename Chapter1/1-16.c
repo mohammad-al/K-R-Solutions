@@ -42,17 +42,19 @@ int myGetline(char s[], int lim) {
 	++i, ++length) {
 		s[i] = c;
 	}
-	// Means line is too long
-	if (i >= lim - 1) {
-		int j;
-		// Keep incrementing length until reached end of line or EOF
-		while ((j = getchar()) != EOF && j != '\n') {
-			++length;
-		}
-	} else if (c == '\n') {
+	if (c == '\n') {
 		s[i] = c;
 		++i;
 		++length;
+	// Means line is too long
+	} else if (i >= lim - 1) {
+		// Keep incrementing length until reached end of line or EOF
+		while ((c = getchar()) != EOF && c != '\n') {
+			++length;
+		}
+		if (c == '\n') {
+			++length;
+		}
 	}
 	s[i] = '\0';
 	return length;
