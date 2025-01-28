@@ -5,8 +5,8 @@ This repository contains my own solutions to the exercises given in the book
 'The C programming Language' by Brian Kernighan and Dennis Ritchie, specifically,
 the second edition, otherwise referred to as simply 'K&R2'. It should be mentioned,
 that C was itself created by one of the co-authors of this book, Dennis Ritchie
-during his time at Bell Labs. Brian Kernighan, also a Bell Labs employee wrote much
-of the content of 'The C Programming Language' book.
+during his time at Bell Labs. Brian Kernighan, also a Bell Labs employee, wrote much
+of expository content of this book.
 
 All code has been written entirely myself without any external help other than the book itself.
 It is for this reason that there is no guarantee that the solutions are entirely
