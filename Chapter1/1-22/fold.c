@@ -69,16 +69,15 @@ int findLastBlank(char line[], int pos) {
 	return pos;
 }
 int rearrange(char line[], int pos) {
+	// Just start at beginning. Means no blanks.
 	if (pos >= MAXCOL) {
 		return 0;
 	}
 	int j = pos;
 	int i;
+	// Copy remainder of line into the beginning. In other words, perform shift
 	for (i = 0; j < MAXCOL; ++i, ++j) {
 		line[i] = line[j];
 	}
 	return i;
 }
-
-// 012345678
-// hello     
