@@ -8,7 +8,8 @@
 
 void remove_inline_comment(void);
 void remove_block_comment(void);
-void expand_quotes(void);
+void expand_double_quotes(void);
+void expand_single_quotes(void);
 
 int main(void) {
 
@@ -28,7 +29,10 @@ int main(void) {
 		// Inside a string literal
 		} else if (c == '"') { 
 			putchar(c);
-			expand_quotes();	
+			expand_double_quotes();	
+		} else if (c == '\'') {
+			putchar(c);
+			expand_single_quotes();
 		} else {
 			putchar(c);
 		}
@@ -55,10 +59,26 @@ void remove_block_comment(void) {
 		d = getchar();
 	}
 }
-void expand_quotes(void) {
+void expand_double_quotes(void) {
 	int c;
 	while ((c = getchar()) != '"') {
 		putchar(c);
+		if (c == '\\') {
+			putchar(getchar());
+		}
 	}
 	putchar(c);
 }
+
+void expand_single_quotes(void) {
+	
+	int c;
+	while ((c = getchar()) != '\'') {
+		putchar(c);
+		if (c == '\\') {
+			putchar(getchar());
+		}
+	}
+	putchar(c);
+}
+
