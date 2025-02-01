@@ -40,12 +40,16 @@ int main(void) {
 }
 
 void remove_inline_comment(void) {
+
+	int c;
 	
-	// Keep reading until we have reached the end of the line
-	while (getchar() != '\n') {
+	// Keep reading until we have reached the end of the line or EOF
+	while ((c = getchar()) != '\n' && c != EOF) {
 		;
 	}	
-	putchar('\n');
+	if (c != EOF) { 
+		putchar(c);
+	}
 }
 void remove_block_comment(void) {
 
