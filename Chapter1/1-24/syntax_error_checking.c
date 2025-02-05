@@ -86,7 +86,6 @@ char pop(void) {
 		--stackPos;
 		return stack[stackPos];
 	} else {
-		printf("Error: Stack is empty\n");
 		return 0;
 	}
 }
