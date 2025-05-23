@@ -34,7 +34,7 @@ int bitcount(unsigned int x) {
 	Let us take the example below and see if we notice anything.
 
 	011001010 +
-			1
+		1
 	_________
 	011001011
 
@@ -44,7 +44,7 @@ int bitcount(unsigned int x) {
 
              1
 	01010111001 +
-			  1
+		  1
 	___________
 	01010111010
 
