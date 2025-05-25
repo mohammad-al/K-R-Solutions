@@ -139,9 +139,7 @@ int getop(char s[]) {
 	while ((s[0] = c = getch()) == ' ' || c == '\t')
 		;
 	s[1] = '\0';
-	if (!isdigit(c) && c != '.' && c != '-') {
-		return c;
-	}
+
 	// We could possibly have a negative number, or minus sign
 	if (c == '-') {
 		// If this is true, we have a minus sign. Just return '-'
@@ -156,6 +154,11 @@ int getop(char s[]) {
 			ungetch(c);
 		}
 	}
+
+	if (!isdigit(c) && c != '.') {
+		return c;
+	}
+
 	i = 0;
 	if (isdigit(c)) {
 		while (isdigit(s[++i] = c = getch()))
