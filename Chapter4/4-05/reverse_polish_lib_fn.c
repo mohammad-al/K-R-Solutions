@@ -156,15 +156,13 @@ int getop(char s[]) {
 		if (c != EOF) {
 			ungetch(c);
 		}
+		// If the string is not atleast 1 character long, then we can't have
+		// a mathematical function
 		if (strlen(s) > 1) {
 			return MATH_FUNCTION;
 		} else {
 			return c;	
 		}
-	}
-
-	if (!isdigit(c) && c != '.' && c != '-') {
-		return c;
 	}
 
 	// We could possibly have a negative number, or minus sign
@@ -180,6 +178,10 @@ int getop(char s[]) {
 		if (c != EOF) {
 			ungetch(c);
 		}
+	}
+
+	if (!isdigit(c) && c != '.') {
+		return c;
 	}
 
 	i = 0;
