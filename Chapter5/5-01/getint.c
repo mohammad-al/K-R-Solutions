@@ -41,6 +41,8 @@ int getint(int *pn) {
 	// Next character should be digit.
 	if (!isdigit(c) && c != EOF) {
 		ungetch(c);
+		// Ungetch the sign
+		ungetch(sign == -1 ? '-' : '+');
 		return 0;
 	}
 	for (*pn = 0; isdigit(c); c = getch()) {
