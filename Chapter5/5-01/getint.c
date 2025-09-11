@@ -37,13 +37,12 @@ int getint(int *pn) {
 	// Skip the sign if it is there
 	if (c == '-' || c == '+') {
 		c = getch();	
-	}
-	// Next character should be digit.
-	if (!isdigit(c) && c != EOF) {
-		ungetch(c);
-		// Ungetch the sign
-		ungetch(sign == -1 ? '-' : '+');
-		return 0;
+		// If there is a sign, next character should be digit
+		if (!isdigit(c) && c != EOF) {
+			ungetch(c);
+			ungetch(sign == -1 ? '-' : '+');
+			return 0;
+		}
 	}
 	for (*pn = 0; isdigit(c); c = getch()) {
 		*pn = *pn * 10 + (c - '0');
