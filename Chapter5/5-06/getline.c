@@ -13,16 +13,16 @@ int main(void) {
 
 int my_getline(char *s, int lim) {
 
-	int c, i;
+	char *original_s = s;
+	int c;
 
-	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
-		s[i] = c;
-		*(s + i) = c;
+	while (--lim > 0 && (c = getchar()) != EOF && c != '\n') {
+		*s++ = c;
 	}
 	if (c == '\n') {
-		*(s + i) = c;
-		++i;
+		*s++ = '\n';
 	}
-	s[i] = '\0';
-	return i;
+	*s = '\0';
+
+	return s - original_s;
 }
