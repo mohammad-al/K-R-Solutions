@@ -24,11 +24,11 @@ int strend(char *s, char *t) {
 		;
 	}
 
-	for (; *s == *t && s >= original_s && t >= original_t; s--, t--) {
+	for (; *s == *t && s != original_s && t != original_t; s--, t--) {
 		;
 	}
 	// Only if we gone through all of t, then we have match
-	if (t == original_t - 1) {
+	if (*s == *t && t == original_t) {
 		return 1;
 	} else {
 		return 0;
