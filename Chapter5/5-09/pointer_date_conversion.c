@@ -45,7 +45,7 @@ void month_day(int year, int yearday, int *pmonth, int *pday) {
 
 	while (yearday > *year_pointer) {
 		yearday -= *year_pointer;
-		*year_pointer++;
+		year_pointer++;
 	}
 
 	// Just find difference between how far yearday has moved from where it started
