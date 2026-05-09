@@ -21,7 +21,7 @@ int day_of_year(int year, int month, int day) {
 	}
 
 	int i, leap;
-	leap = year % 4 == 0 && year % 100 != 0 || year % 400 != 0;
+	leap = year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 
 	if (month < 1 || month > 12) {
 		return -1;
@@ -45,7 +45,7 @@ void month_day(int year, int yearday, int *pmonth, int *pday) {
 	}
 
 	int i, leap;
-	leap = year % 4 == 0 && year % 100 != 0 || year % 400 != 0;
+	leap = year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 
 	int max_yearday = 366 ? leap : 365;
 
