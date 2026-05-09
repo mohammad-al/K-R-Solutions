@@ -6,22 +6,25 @@
 // Maximum length of any given line
 #define MAXLEN 1000
 
-int readlines(char *lineptr[], int maxlines) {
+int readlines(char *lineptr[], int maxlines, char *line_storage, int maxstorage) {
 	
 	int nlines = 0;
 	int len;
-	char *p;
+	char *p = line_storage;
 	char line[MAXLEN];
+
+	char *final_address = line_storage + maxstorage - 1; 
 
 	// if we read a line, then handle it
 	while ((len = my_getline(line, MAXLEN)) > 0) {
-		if (nlines >= maxlines || (p = alloc(len)) == NULL) {
+		if (nlines >= maxlines || p + len - 1 > final_address) {
 			return -1;
 		} else {
 			// Remove the newline character from the line
 			line[len - 1] = '\0';
 			strcpy(p, line);
 			lineptr[nlines++] = p;
+			p += len;
 		}
 	}
 	return nlines;

@@ -5,8 +5,12 @@
 // max number of lines that can be stored
 #define MAXLINES 5000
 
+#define MAXSTORAGE 10000
+
 // Pointers to text lines
 char *lineptr[MAXLINES];
+
+char line_storage[MAXSTORAGE];
 
 void swap(char *v[], int i, int j);
 void qsort(char *lineptr[], int left, int right);
@@ -17,7 +21,7 @@ int main(void) {
 	int nlines;
 
 	// Means we read a line
-	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
+	if ((nlines = readlines(lineptr, MAXLINES, line_storage, MAXSTORAGE)) >= 0) {
 		qsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
 		return 0;
