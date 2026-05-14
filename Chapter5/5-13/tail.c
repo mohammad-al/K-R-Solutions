@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
 	nlines = readlines(lineptr, MAXLINES);
 	if (nlines < 0) {
 		printf("error: input too big\n");
+		return 1;
 	}
 
 	// Adjust num lines to print, if we didn't read enough lines
