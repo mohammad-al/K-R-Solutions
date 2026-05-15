@@ -1,0 +1,15 @@
+Hello there, how are you?
+This is a test to see how the program works.
+I hope you are well.
+All is good if you set your mind too it.
+Awesome work, keep it up.
+Becoming a good student is a noble aim.
+hello world
+all is fair in love and war
+Brian Kernighan and Dennis Ritchie
+Ken Thompson seems like he knows what he is doing
+C or C++? That is an important question
+All for one, and one for all!
+Determinants are kinda cool in Mathematics
+Malloc, alloc, calloc, ahh, its all the same, right?
+Exceptional work!
