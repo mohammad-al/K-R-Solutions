@@ -8,16 +8,17 @@
 
 // Anonymous enum. Just defines NAME 0, PARENS 1, and BRACKETS 2. These are token types
 enum { NAME, PARENS, BRACKETS };
+enum { NO, YES };
 
 int tokentype;
 
 char buf[BUFSIZE];
 int bufp = 0;
 
-void dcl(void);
-void dirdcl(void);
+int previous_token = NO;
 
 int gettoken(void);
+int get_next_token(void);
 
 // Current token string that was just parsed/read
 char token[MAXTOKEN];
@@ -40,7 +41,12 @@ int main(void) {
 			if (type == PARENS || type == BRACKETS) {
 				strcat(out, token);
 			} else if (type == '*') {
-				sprintf(temp, "(*%s)", out);
+				// Means we need the pointer wrapped in brackets
+				if ((type = get_next_token()) == PARENS || type == BRACKETS) {
+					sprintf(temp, "(*%s)", out);
+				} else {
+					sprintf(temp, "*%s", out);
+				}
 				strcpy(out, temp);
 			} else if (type == NAME) {
 				sprintf(temp, "%s %s", token, out);
@@ -56,6 +62,12 @@ int main(void) {
 }
 
 int gettoken(void) {
+
+	// Means have already read next token. Just use that value instead
+	if (previous_token) {
+		previous_token = NO;
+		return tokentype;
+	}
 	
 	int c;
 	char *p = token;
@@ -101,6 +113,12 @@ int gettoken(void) {
 	} else {
 		return tokentype = c;
 	}
+}
+
+int get_next_token(void) {
+	int type = gettoken();
+	previous_token = YES;
+	return type;
 }
 
 int getch() {
