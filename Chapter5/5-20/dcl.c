@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAXTOKEN 100
 #define BUFSIZE 100
@@ -33,6 +34,11 @@ char out[1000];
 int getch();
 void ungetch(int c);
 
+void parse_arguments(void);
+
+int read_prev_token = 0;
+
+int valid_specifier_or_type(void);
 
 int main(void) {
 	while (gettoken() != EOF) {
@@ -85,12 +91,16 @@ void dirdcl(void) {
 	} else if (tokentype == NAME) {
 		strcpy(name, token);
 	} else {
-		printf("error: expected name of (dcl)\n");
+		read_prev_token = 1;
 	}
 
-	while ((type = gettoken()) == PARENS || type == BRACKETS) {
+	while ((type = gettoken()) == PARENS || type == BRACKETS || type == '(') {
 		if (type == PARENS) {
 			strcat(out, " function returning");
+		} else if (type == '(') {
+			strcat(out, " function expecting arguments");
+			parse_arguments();
+			strcat(out, " returning");
 		} else {
 			strcat(out, " array");
 			strcat(out, token);
@@ -100,6 +110,10 @@ void dirdcl(void) {
 }
 
 int gettoken(void) {
+	if (read_prev_token) {
+		read_prev_token = 0;
+		return tokentype;
+	}
 	
 	int c;
 	char *p = token;
@@ -146,11 +160,58 @@ int gettoken(void) {
 		return tokentype = c;
 	}
 }
+void parse_arguments(void) {
+
+	gettoken();
+	// Outer while loop goes through every argument
+	while (tokentype != ')') {
+
+		char temp[MAXTOKEN];
+		temp[0] = '\0';
+
+		// Inner while loop goes through every word in the argument
+		while (tokentype != ')' && tokentype != ',') {
+
+			if (tokentype != NAME) {
+				read_prev_token = 1;
+				dcl();
+			} else if (valid_specifier_or_type()) {
+				strcat(temp, " ");
+				strcat(temp, token);
+				gettoken();
+			} else {
+				printf("error: unkown type in argument list\n");
+				exit(1);
+			}
+		}
+
+		strcat(out, temp);
+		if (tokentype == ',') {
+			strcat(out, ",");
+			gettoken();
+		}
+	}
+}
+
+int valid_specifier_or_type(void) {
+
+	if (strcmp(token, "char") == 0 || 
+		strcmp(token, "int") == 0 || 
+		strcmp(token, "void") == 0) {
+		
+		return 1;
+	}
+	if (strcmp(token, "volatile") == 0 || 
+		strcmp(token, "const") == 0) {
+		return 1;
+	}
+	return 0;
+
+}
 
 int getch() {
 
 	return bufp > 0 ? buf[--bufp] : getchar();
-	
 }
 
 void ungetch(int c) {
@@ -217,6 +278,4 @@ void ungetch(int c) {
 
 		if BRACKETS:
 			append "array ... of"
-
-
 */
