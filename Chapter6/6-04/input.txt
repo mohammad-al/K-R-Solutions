@@ -1,0 +1,12 @@
+hello there
+this is a
+test to see
+how the cross
+referencer works.
+btw, my name is mohammad
+and this is a solution,
+or an attempt of the solution
+to exercise 6-03 from the c programming language
+book by k&r
+mohammad out
+see yall later
